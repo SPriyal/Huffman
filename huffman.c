@@ -35,7 +35,9 @@ int main(void)
   	char buf[1024];
 	init(data);
 	compress(data, buf);
-	printf("Compressed: %s\n", buf);
+	printf("Compressed data: %s\n\n", buf);
+	printf("Data after decompression: ");
+	decompress(buf, byte[1]);
 	return 0;
 }
 
@@ -131,3 +133,25 @@ void compress(const char *s, char *out)
 	printf("\n");
 }
 
+void decompress(const char *s, node t) 
+{
+	node n = t;
+	while (*s) 
+	{
+		if (*s++ == '0')
+		{
+       		n = n->left;
+		} else n = n->right;
+
+		if (n->c) 
+		{
+       		putchar(n->c), n = t;
+    	}
+	}
+
+	putchar('\n');
+	if (t != n) 
+	{
+   		printf("invalid\n");
+  	}
+}
